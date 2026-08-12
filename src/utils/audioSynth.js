@@ -62,16 +62,13 @@ class AudioEngine {
     this.stopMelody();
 
     if (this.localAudioElement) {
-      if (this.localAudioElement.src !== window.location.origin + audioUrl && audioUrl) {
+      const targetSrc = window.location.origin + encodeURI(audioUrl);
+      if (this.localAudioElement.src !== targetSrc && audioUrl) {
         this.localAudioElement.src = audioUrl;
       }
       this.localAudioElement.play().catch(err => {
         console.warn('Playback error or no file at url:', audioUrl, err);
-        // Fallback to synth melody if local audio file fails to load
-        this.startMelody();
       });
-    } else {
-      this.startMelody();
     }
   }
 

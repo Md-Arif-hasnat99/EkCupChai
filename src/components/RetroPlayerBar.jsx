@@ -115,7 +115,6 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
 
   const handleNextTrack = () => {
     audioEngine.playButtonClick();
-    audioEngine.triggerRadioStaticBurst();
     const nextIdx = (currentTrackIndex + 1) % currentAlbum.tracks.length;
     setCurrentTrackIndex(nextIdx);
     setCurrentTime(0);
@@ -126,7 +125,6 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
 
   const handlePrevTrack = () => {
     audioEngine.playButtonClick();
-    audioEngine.triggerRadioStaticBurst();
     const prevIdx = (currentTrackIndex - 1 + currentAlbum.tracks.length) % currentAlbum.tracks.length;
     setCurrentTrackIndex(prevIdx);
     setCurrentTime(0);
@@ -138,7 +136,6 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
   const handleSwitchAlbum = () => {
     const nextIdx = (currentAlbumIndex + 1) % ALBUMS.length;
     audioEngine.playButtonClick();
-    audioEngine.triggerRadioStaticBurst();
     setCurrentAlbumIndex(nextIdx);
     setCurrentTrackIndex(0);
     setCurrentTime(0);
