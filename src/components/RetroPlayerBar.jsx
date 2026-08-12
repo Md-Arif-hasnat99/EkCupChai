@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { audioEngine } from '../utils/audioSynth';
 
+// Track & Album configuration supporting local audio files & Spotify cover images
 const ALBUMS = [
   {
     name: "ROAD-SIDE MEMORIES '96",
     tag: "TAPE A",
     coverStyle: "linear-gradient(135deg, #5c1d24, #9a3b26)",
     tracks: [
-      { title: "CHAI TAPRI MEMORIES", artist: "Vintage Radio Lo-Fi", duration: 184 },
-      { title: "SHAM KI CHAI & BPL STEREO", artist: "Highway Nostalgia", duration: 215 },
-      { title: "GAON KI GALIYAN", artist: "Acoustic Dusk Harmony", duration: 198 }
+      { 
+        title: "CHAI TAPRI MEMORIES", 
+        artist: "Vintage Radio Lo-Fi", 
+        duration: 184,
+        audioUrl: "/audio/track1.mp3", // Place your local MP3 file in public/audio/track1.mp3
+        coverUrl: null                  // Optional Spotify album cover URL
+      },
+      { 
+        title: "SHAM KI CHAI & BPL STEREO", 
+        artist: "Highway Nostalgia", 
+        duration: 215,
+        audioUrl: "/audio/track2.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "GAON KI GALIYAN", 
+        artist: "Acoustic Dusk Harmony", 
+        duration: 198,
+        audioUrl: "/audio/track3.mp3", 
+        coverUrl: null 
+      }
     ]
   },
   {
@@ -17,17 +36,20 @@ const ALBUMS = [
     tag: "TAPE B",
     coverStyle: "linear-gradient(135deg, #1e3f3f, #d99a38)",
     tracks: [
-      { title: "MONSOON HIGHWAY '98", artist: "Cassette Lo-Fi Dreams", duration: 202 },
-      { title: "MIDNIGHT BUS TO MUMBAI", artist: "Retro Synth Breeze", duration: 176 }
-    ]
-  },
-  {
-    name: "CHAI TAPRI EVENING RAGAS",
-    tag: "TAPE C",
-    coverStyle: "linear-gradient(135deg, #3d1b38, #8c3b27)",
-    tracks: [
-      { title: "EVENING RAGA LO-FI", artist: "Sitar & Dusk Vibes", duration: 240 },
-      { title: "RAIN ON TIN ROOF CHAI", artist: "Monsoon Night Raga", duration: 210 }
+      { 
+        title: "MONSOON HIGHWAY '98", 
+        artist: "Cassette Lo-Fi Dreams", 
+        duration: 202,
+        audioUrl: "/audio/track4.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "MIDNIGHT BUS TO MUMBAI", 
+        artist: "Retro Synth Breeze", 
+        duration: 176,
+        audioUrl: "/audio/track5.mp3", 
+        coverUrl: null 
+      }
     ]
   }
 ];
@@ -68,7 +90,7 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
     audioEngine.playButtonClick();
     setIsPlaying(true);
     setIsPaused(false);
-    audioEngine.startMelody();
+    audioEngine.playLocalTrack(currentTrack.audioUrl);
   };
 
   const handlePause = () => {
@@ -76,10 +98,10 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
     if (!isPlaying) return;
     if (isPaused) {
       setIsPaused(false);
-      audioEngine.startMelody();
+      audioEngine.playLocalTrack(currentTrack.audioUrl);
     } else {
       setIsPaused(true);
-      audioEngine.stopMelody();
+      audioEngine.pauseLocalTrack();
     }
   };
 
@@ -88,26 +110,28 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
     setIsPlaying(false);
     setIsPaused(false);
     setCurrentTime(0);
-    audioEngine.stopMelody();
+    audioEngine.pauseLocalTrack();
   };
 
   const handleNextTrack = () => {
     audioEngine.playButtonClick();
     audioEngine.triggerRadioStaticBurst();
-    setCurrentTrackIndex((prev) => (prev + 1) % currentAlbum.tracks.length);
+    const nextIdx = (currentTrackIndex + 1) % currentAlbum.tracks.length;
+    setCurrentTrackIndex(nextIdx);
     setCurrentTime(0);
     if (isPlaying && !isPaused) {
-      audioEngine.startMelody();
+      audioEngine.playLocalTrack(currentAlbum.tracks[nextIdx].audioUrl);
     }
   };
 
   const handlePrevTrack = () => {
     audioEngine.playButtonClick();
     audioEngine.triggerRadioStaticBurst();
-    setCurrentTrackIndex((prev) => (prev - 1 + currentAlbum.tracks.length) % currentAlbum.tracks.length);
+    const prevIdx = (currentTrackIndex - 1 + currentAlbum.tracks.length) % currentAlbum.tracks.length;
+    setCurrentTrackIndex(prevIdx);
     setCurrentTime(0);
     if (isPlaying && !isPaused) {
-      audioEngine.startMelody();
+      audioEngine.playLocalTrack(currentAlbum.tracks[prevIdx].audioUrl);
     }
   };
 
@@ -119,7 +143,7 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
     setCurrentTrackIndex(0);
     setCurrentTime(0);
     if (isPlaying && !isPaused) {
-      audioEngine.startMelody();
+      audioEngine.playLocalTrack(ALBUMS[nextIdx].tracks[0].audioUrl);
     }
   };
 
@@ -139,20 +163,27 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
     const ratio = Math.max(0, Math.min(1, clickX / rect.width));
     const newTime = Math.floor(ratio * currentTrack.duration);
     setCurrentTime(newTime);
+    audioEngine.seekLocalTrack(newTime);
   };
 
   return (
     <div className="retro-player-bar-container">
       
-      {/* Left Side: Retro Album Artwork */}
+      {/* Left Side: Retro Album Artwork or Spotify Cover Image */}
       <div 
         className="retro-album-art" 
-        style={{ background: currentAlbum.coverStyle }}
+        style={{ 
+          background: currentTrack.coverUrl ? `url(${currentTrack.coverUrl}) center/cover` : currentAlbum.coverStyle 
+        }}
         onClick={handleSwitchAlbum}
         title="Click to change Tape / Album"
       >
-        <div className="art-label-hindi">एक कप चाय</div>
-        <div className="art-tag">{currentAlbum.tag}</div>
+        {!currentTrack.coverUrl && (
+          <>
+            <div className="art-label-hindi">एक कप चाय</div>
+            <div className="art-tag">{currentAlbum.tag}</div>
+          </>
+        )}
       </div>
 
       {/* Center: Track Details, Progress Bar & Retro Buttons */}

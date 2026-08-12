@@ -1,5 +1,5 @@
 /* ==========================================================================
-   WEB AUDIO API SYNTHESIZER - 90s Indian Chai Stall Audio Engine
+   WEB AUDIO API SYNTHESIZER & LOCAL AUDIO PLAYER ENGINE
    ========================================================================== */
 
 class AudioEngine {
@@ -17,6 +17,9 @@ class AudioEngine {
 
     this.activeMelodies = [];
     this.sequenceInterval = null;
+
+    // HTML5 Audio element for local MP3/WAV file playback
+    this.localAudioElement = null;
   }
 
   init() {
@@ -34,7 +37,12 @@ class AudioEngine {
     this.musicGain.gain.value = 0.8;
     this.musicGain.connect(this.masterGain);
 
-    // Setup Noise Generators
+    // HTML5 Audio Node for local files
+    this.localAudioElement = new Audio();
+    const sourceNode = this.audioCtx.createMediaElementSource(this.localAudioElement);
+    sourceNode.connect(this.musicGain);
+
+    // Setup Ambient Noise Generators
     this._setupStaticNoise();
     this._setupKettleSteam();
     this._setupNightAmbiance();
@@ -42,7 +50,42 @@ class AudioEngine {
 
   setMasterVolume(val) {
     if (!this.audioCtx) return;
-    this.masterGain.gain.setValueAtTime(Math.max(0, Math.min(1, val)), this.audioCtx.currentTime);
+    const vol = Math.max(0, Math.min(1, val));
+    this.masterGain.gain.setValueAtTime(vol, this.audioCtx.currentTime);
+    if (this.localAudioElement) {
+      this.localAudioElement.volume = vol;
+    }
+  }
+
+  playLocalTrack(audioUrl) {
+    this.init();
+    this.stopMelody();
+
+    if (this.localAudioElement) {
+      if (this.localAudioElement.src !== window.location.origin + audioUrl && audioUrl) {
+        this.localAudioElement.src = audioUrl;
+      }
+      this.localAudioElement.play().catch(err => {
+        console.warn('Playback error or no file at url:', audioUrl, err);
+        // Fallback to synth melody if local audio file fails to load
+        this.startMelody();
+      });
+    } else {
+      this.startMelody();
+    }
+  }
+
+  pauseLocalTrack() {
+    if (this.localAudioElement) {
+      this.localAudioElement.pause();
+    }
+    this.stopMelody();
+  }
+
+  seekLocalTrack(seconds) {
+    if (this.localAudioElement) {
+      this.localAudioElement.currentTime = seconds;
+    }
   }
 
   _setupStaticNoise() {
@@ -88,7 +131,7 @@ class AudioEngine {
     filter.frequency.value = 3200;
 
     this.kettleGain = this.audioCtx.createGain();
-    this.kettleGain.gain.value = 0.04; // default on
+    this.kettleGain.gain.value = 0.04;
 
     this.kettleNode.connect(filter);
     filter.connect(this.kettleGain);
@@ -116,7 +159,7 @@ class AudioEngine {
     filter.frequency.value = 850;
 
     this.nightGain = this.audioCtx.createGain();
-    this.nightGain.gain.value = 0.05; // default on
+    this.nightGain.gain.value = 0.05;
 
     this.nightNode.connect(filter);
     filter.connect(this.nightGain);
