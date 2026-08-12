@@ -79,7 +79,11 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
       try {
         const token = await getSpotifyAccessToken(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET);
         if (token) {
-          const info = await fetchSpotifyTrackInfo(`${currentTrack.title} ${currentTrack.artist}`, token);
+          // Clean the artist name (remove bullet points and year details for friendly search query)
+          const cleanArtist = currentTrack.artist.split('•')[0].split('(')[0].trim();
+          const query = `${currentTrack.title} ${cleanArtist}`;
+          
+          const info = await fetchSpotifyTrackInfo(query, token);
           if (info && info.albumCover) {
             setDynamicCoverUrl(info.albumCover);
           } else {
@@ -201,7 +205,7 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
         className="retro-album-art" 
         style={{ 
           background: (dynamicCoverUrl || currentTrack.coverUrl) 
-            ? `url(${dynamicCoverUrl || currentTrack.coverUrl}) center/cover` 
+            ? `url("${dynamicCoverUrl || currentTrack.coverUrl}") center/cover` 
             : currentAlbum.coverStyle 
         }}
         onClick={handleSwitchAlbum}
