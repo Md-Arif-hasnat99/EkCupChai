@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { audioEngine } from '../utils/audioSynth';
+import { getSpotifyAccessToken, fetchSpotifyTrackInfo } from '../utils/spotifyApi';
+
+// Configure your Spotify API credentials here to fetch album artwork automatically
+const SPOTIFY_CLIENT_ID = ""; // Insert your Client ID
+const SPOTIFY_CLIENT_SECRET = ""; // Insert your Client Secret
 
 // Track & Album configuration supporting local audio files & Spotify cover images
 const ALBUMS = [
@@ -60,9 +65,34 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [dynamicCoverUrl, setDynamicCoverUrl] = useState(null);
 
   const currentAlbum = ALBUMS[currentAlbumIndex];
   const currentTrack = currentAlbum.tracks[currentTrackIndex];
+
+  useEffect(() => {
+    async function loadSpotifyCover() {
+      if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
+        setDynamicCoverUrl(null);
+        return;
+      }
+      try {
+        const token = await getSpotifyAccessToken(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET);
+        if (token) {
+          const info = await fetchSpotifyTrackInfo(`${currentTrack.title} ${currentTrack.artist}`, token);
+          if (info && info.albumCover) {
+            setDynamicCoverUrl(info.albumCover);
+          } else {
+            setDynamicCoverUrl(null);
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching Spotify cover:', err);
+        setDynamicCoverUrl(null);
+      }
+    }
+    loadSpotifyCover();
+  }, [currentTrack]);
 
   useEffect(() => {
     let interval = null;
@@ -170,12 +200,14 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
       <div 
         className="retro-album-art" 
         style={{ 
-          background: currentTrack.coverUrl ? `url(${currentTrack.coverUrl}) center/cover` : currentAlbum.coverStyle 
+          background: (dynamicCoverUrl || currentTrack.coverUrl) 
+            ? `url(${dynamicCoverUrl || currentTrack.coverUrl}) center/cover` 
+            : currentAlbum.coverStyle 
         }}
         onClick={handleSwitchAlbum}
         title="Click to change Tape / Album"
       >
-        {!currentTrack.coverUrl && (
+        {!(dynamicCoverUrl || currentTrack.coverUrl) && (
           <>
             <div className="art-label-hindi">एक कप चाय</div>
             <div className="art-tag">{currentAlbum.tag}</div>
