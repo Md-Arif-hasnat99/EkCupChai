@@ -4,16 +4,16 @@ import { audioEngine } from '../utils/audioSynth';
 // Track & Album configuration supporting local audio files & Spotify cover images
 const ALBUMS = [
   {
-    name: "ROAD-SIDE MEMORIES '96",
+    name: "DDLJ & 90s CLASSICS",
     tag: "TAPE A",
     coverStyle: "linear-gradient(135deg, #5c1d24, #9a3b26)",
     tracks: [
       { 
-        title: "CHAI TAPRI MEMORIES", 
-        artist: "Vintage Radio Lo-Fi", 
-        duration: 184,
-        audioUrl: "/audio/track1.mp3", // Place your local MP3 file in public/audio/track1.mp3
-        coverUrl: null                  // Optional Spotify album cover URL
+        title: "TUJHE DEKHA TOH YEH JANA SANAM", 
+        artist: "Kumar Sanu & Lata Mangeshkar • DDLJ (1995)", 
+        duration: 305,
+        audioUrl: "/audio/Tujhe Dekha Toh Song Dilwale Dulhania Le Jayenge Shah Rukh Khan, Kajol Lata, Kumar Sanu DDLJ.mp3",
+        coverUrl: null
       },
       { 
         title: "SHAM KI CHAI & BPL STEREO", 
