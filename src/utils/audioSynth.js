@@ -128,7 +128,7 @@ class AudioEngine {
     filter.frequency.value = 3200;
 
     this.kettleGain = this.audioCtx.createGain();
-    this.kettleGain.gain.value = 0.04;
+    this.kettleGain.gain.value = 0;
 
     this.kettleNode.connect(filter);
     filter.connect(this.kettleGain);
@@ -156,7 +156,7 @@ class AudioEngine {
     filter.frequency.value = 850;
 
     this.nightGain = this.audioCtx.createGain();
-    this.nightGain.gain.value = 0.05;
+    this.nightGain.gain.value = 0;
 
     this.nightNode.connect(filter);
     filter.connect(this.nightGain);
