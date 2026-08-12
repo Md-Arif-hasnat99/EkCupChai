@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>एक कप चाय - 90s Roadside Chai Stall Nostalgia</title>
+  <meta name="description" content="A 1990s Indian roadside chai stall nostalgia web experience with vintage cassette music player, LED clock, chalk slate listener counter, and ambient tea stall vibes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Kalam:wght@400;700&family=Rozha+One&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Fullscreen Scene Container -->
+  <div id="scene-container" class="scene-container">
+    <!-- Responsive Background Images -->
+    <picture class="bg-picture">
+      <source media="(max-aspect-ratio: 1/1)" srcset="assets/bg-1.jpg">
+      <img src="assets/bg-2.jpg" alt="एक कप चाय - 90s Roadside Chai Stall at Dusk" id="bg-img" class="bg-img">
+    </picture>
+
+    <!-- Ambient Overlay for Dusk Glow & Grain -->
+    <div class="dusk-overlay"></div>
+    <div class="vintage-grain-overlay"></div>
+
+    <!-- Interactive Scene Hotspots -->
+    <div class="hotspots-layer">
+      <!-- Hanging Bulb Hotspot -->
+      <div id="bulb-hotspot" class="hotspot bulb-hotspot" title="Light Bulb (Click to toggle glow)">
+        <div class="bulb-glow-element" id="bulb-glow"></div>
+      </div>
+
+      <!-- Kettle Hotspot -->
+      <div id="kettle-hotspot" class="hotspot kettle-hotspot" title="Tea Kettle (Click for steam & sound)">
+        <div class="steam-container" id="steam-container">
+          <span class="steam-puff"></span>
+          <span class="steam-puff"></span>
+          <span class="steam-puff"></span>
+        </div>
+      </div>
+
+      <!-- Glasses Rack Hotspot -->
+      <div id="glasses-hotspot" class="hotspot glasses-hotspot" title="Cutting Chai Glasses (Click for pour sound)"></div>
+
+      <!-- Newspaper Hotspot -->
+      <div id="newspaper-hotspot" class="hotspot newspaper-hotspot" title="Read 1996 Newspaper (Click to open)"></div>
+    </div>
+
+    <!-- TOP-LEFT: 90s RED LED DIGITAL CLOCK -->
+    <div id="digital-clock" class="retro-clock-panel">
+      <div class="clock-bezel">
+        <div class="clock-header">
+          <span class="brand-tag">BPL DIGITAL</span>
+          <span class="model-tag">ALARM-1996</span>
+        </div>
+        <div class="led-display">
+          <span id="clock-time" class="led-digits">12:00:00</span>
+          <span id="clock-ampm" class="led-ampm">PM</span>
+        </div>
+        <div class="clock-indicators">
+          <span class="indicator active">● SLEEP</span>
+          <span class="indicator">● ALARM</span>
+          <span id="tape-sync-indicator" class="indicator">● TAPE SYNC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP-RIGHT: LIVE LISTENER CHALK SLATE COUNTER -->
+    <div id="listener-counter" class="chalk-slate-panel">
+      <div class="slate-wood-frame">
+        <div class="slate-surface">
+          <div class="chalk-header-text">एक कप चाय ☕</div>
+          <div class="chalk-counter-body">
+            <span id="listener-count" class="chalk-number">142</span>
+            <span class="chalk-label">log abhi yahan hain</span>
+          </div>
+          <div class="chalk-subtext">लोग अभी यहाँ हैं</div>
+          <div class="chalk-dust"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CORE UI: VINTAGE 90s CASSETTE MUSIC PLAYER -->
+    <div id="cassette-player" class="retro-player-container">
+      <div class="player-casing maroon-plastic-body">
+        
+        <!-- Scratches & Wear Overlay -->
+        <div class="scratches-texture"></div>
+        <div class="worn-corner-sticker">
+          <span class="sticker-brand">BUSH STEREO</span>
+          <span class="sticker-sub">HIGH FIDELITY TAPE</span>
+          <span class="sticker-year">MAY 1996</span>
+        </div>
+
+        <!-- Screws in 4 Corners -->
+        <div class="screw top-left"></div>
+        <div class="screw top-right"></div>
+        <div class="screw bottom-left"></div>
+        <div class="screw bottom-right"></div>
+
+        <!-- Top Panel Header -->
+        <div class="player-top-bar">
+          <div class="brand-silkscreen">BUSH TAPE-DECK 96</div>
+          <div class="tape-selector-tabs">
+            <button class="tape-tab active" data-tape="0">TAPE A</button>
+            <button class="tape-tab" data-tape="1">TAPE B</button>
+            <button class="tape-tab" data-tape="2">AMBIENCE</button>
+          </div>
+        </div>
+
+        <!-- Middle Section: Cassette Compartment & Dot-Matrix LCD Display -->
+        <div class="player-main-section">
+
+          <!-- Left Slot: Cassette Tape Unit with Rotating Spools -->
+          <div class="cassette-slot-unit">
+            <div class="cassette-window">
+              <!-- Illustrated Cassette Tape -->
+              <div class="cassette-tape-body" id="cassette-body">
+                <div class="tape-label">
+                  <div class="tape-title" id="tape-label-title">ROAD-SIDE MEMORIES '96</div>
+                  <div class="tape-side">SIDE A - STEREO</div>
+                </div>
+                <div class="spool-container">
+                  <!-- Left Spool Reel -->
+                  <div class="tape-spool spool-left" id="spool-left">
+                    <div class="spool-teeth"></div>
+                    <div class="tape-roll-left" id="tape-roll-left"></div>
+                  </div>
+                  <!-- Tape Window Bridge -->
+                  <div class="tape-bridge-window">
+                    <div class="tape-ribbon"></div>
+                  </div>
+                  <!-- Right Spool Reel -->
+                  <div class="tape-spool spool-right" id="spool-right">
+                    <div class="spool-teeth"></div>
+                    <div class="tape-roll-right" id="tape-roll-right"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cassette-eject-bevel">
+              <span class="eject-label">PRESS HEAVY TO EJECT</span>
+            </div>
+          </div>
+
+          <!-- Right Info Panel: Amber Dot-Matrix LCD Display & Control Dials -->
+          <div class="lcd-control-panel">
+            
+            <!-- Green / Amber Dot-Matrix LCD Display Screen -->
+            <div class="lcd-screen amber-glow">
+              <div class="lcd-top-status">
+                <span id="lcd-mode-status" class="lcd-status-text">● PLAYING</span>
+                <span id="lcd-track-num" class="lcd-status-text">TR-01 / 06</span>
+              </div>
+              
+              <!-- Marquee Song Display -->
+              <div class="lcd-marquee-wrapper">
+                <div id="lcd-song-title" class="lcd-marquee-text">TRACK 1: CHAI TAPRI MEMORIES - VINTAGE RADIO LO-FI</div>
+              </div>
+
+              <div class="lcd-bottom-info">
+                <span id="lcd-time-code" class="lcd-time">01:42</span>
+                <span id="lcd-freq" class="lcd-freq">FM 93.5 MHz</span>
+              </div>
+            </div>
+
+            <!-- Dials & Sliders Area (Volume Rotary Knob + Ambiance Toggles) -->
+            <div class="controls-dials-row">
+              
+              <!-- Rotary Volume Knob -->
+              <div class="rotary-knob-container">
+                <label class="knob-label">MASTER VOL</label>
+                <div id="volume-knob" class="rotary-knob" tabindex="0" role="slider" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="Master Volume Knob">
+                  <div class="knob-face">
+                    <div class="knob-notch" id="knob-notch"></div>
+                  </div>
+                </div>
+                <span id="volume-val-display" class="knob-val">75%</span>
+              </div>
+
+              <!-- Ambient Sound Toggle Buttons (Mini 90s Switches) -->
+              <div class="ambient-switches-rack">
+                <label class="switches-label">AMBIENT VIBES</label>
+                <div class="switch-buttons-grid">
+                  <button id="btn-amb-kettle" class="retro-toggle-btn active" title="Kettle Boiling Ambiance">
+                    <span class="toggle-icon">🫖</span> STEAM
+                  </button>
+                  <button id="btn-amb-rain" class="retro-toggle-btn active" title="Dusk Crickets & Rain">
+                    <span class="toggle-icon">🌧️</span> NIGHT
+                  </button>
+                  <button id="btn-amb-static" class="retro-toggle-btn" title="Radio Tuning Static">
+                    <span class="toggle-icon">📻</span> STATIC
+                  </button>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Bottom Mechanical Buttons Section (Chunky Silkscreened 90s Tape Deck Buttons) -->
+        <div class="tape-buttons-row">
+          <button id="btn-rewind" class="deck-btn btn-rew" title="Rewind / Previous Track">
+            <span class="silkscreen-icon">⏮</span>
+            <span class="deck-btn-label">REW</span>
+          </button>
+          <button id="btn-play" class="deck-btn btn-play active-state" title="Play Cassette">
+            <span class="silkscreen-icon">▶</span>
+            <span class="deck-btn-label">PLAY</span>
+          </button>
+          <button id="btn-pause" class="deck-btn btn-pause" title="Pause Cassette">
+            <span class="silkscreen-icon">⏸</span>
+            <span class="deck-btn-label">PAUSE</span>
+          </button>
+          <button id="btn-stop" class="deck-btn btn-stop" title="Stop">
+            <span class="silkscreen-icon">⏹</span>
+            <span class="deck-btn-label">STOP</span>
+          </button>
+          <button id="btn-ffwd" class="deck-btn btn-ff" title="Fast Forward / Next Track">
+            <span class="silkscreen-icon">⏭</span>
+            <span class="deck-btn-label">FFWD</span>
+          </button>
+          <button id="btn-eject" class="deck-btn btn-eject-btn" title="Change Cassette Tape">
+            <span class="silkscreen-icon">⏏</span>
+            <span class="deck-btn-label">EJECT</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RETRO NEWSPAPER POPUP MODAL -->
+    <div id="newspaper-modal" class="modal-overlay hidden">
+      <div class="newspaper-paper">
+        <button id="close-newspaper-btn" class="close-paper-btn">✕ CLOSE</button>
+        <div class="paper-header">
+          <div class="paper-date">15 AUGUST 1996 • EDITION NO. 420</div>
+          <h1 class="paper-title">दैनिक समाचार</h1>
+          <div class="paper-sub">INDIA CELEBRATES 50 YEARS OF FREEDOM • GOLDEN ERAS OF LO-FI CHAI & TAPE DECKS</div>
+        </div>
+        <div class="paper-columns">
+          <div class="paper-col">
+            <h3>रोडसाइड चाय टपरी की यादें</h3>
+            <p>1990 के दशक में शाम के वक्त चाय की दुकान पर रेडियो के गाने और कटिंग चाय की चुस्कियां हर शहर की पहचान हुआ करती थीं। मुरफी और ऑनडा के स्टीरियो पर पुराने सदाबहार नगमे गूंजते थे।</p>
+          </div>
+          <div class="paper-col">
+            <h3>BPL & BUSH STEREO PLAYER</h3>
+            <p>The iconic tape decks with glowing amber LCDs and mechanical click buttons defined late 90s music listening. Cassettes labeled "Highway Hits" and "Monsoon Lo-Fi" ruled the stalls.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
