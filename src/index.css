@@ -190,139 +190,147 @@ html, body {
 }
 
 /* ==========================================================================
-   TOP-LEFT: 90s RED LED DIGITAL CLOCK
+   TOP-LEFT: 90s RED LED DIGITAL CLOCK (TRANSPARENT BACKGROUND OVERLAY)
    ========================================================================== */
 .retro-clock-panel {
   position: absolute;
-  top: 24px;
-  left: 24px;
+  top: 20px;
+  left: 20px;
   z-index: 10;
-  filter: drop-shadow(-4px 8px 10px rgba(0, 0, 0, 0.7));
 }
 
 .clock-bezel {
-  background: #181514;
-  border: 3px solid #332d2a;
-  border-radius: 4px;
-  padding: 10px 14px;
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.9), 2px 3px 0px rgba(0,0,0,0.8);
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
 }
 
 .clock-header {
   display: flex;
   justify-content: space-between;
   font-family: var(--font-led);
-  font-size: 9px;
-  letter-spacing: 1px;
-  color: #776e65;
-  margin-bottom: 4px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: #ff9999;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.95);
+  margin-bottom: 2px;
 }
 
 .led-display {
-  background: var(--c-led-red-bg);
-  border: 2px solid #2a0a0a;
-  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  padding: 0;
   display: flex;
   align-items: baseline;
   gap: 8px;
-  border-radius: 2px;
-  box-shadow: inset 0 0 8px rgba(0,0,0,0.95);
+  box-shadow: none;
 }
 
 .led-digits {
   font-family: var(--font-led);
-  font-size: 26px;
+  font-size: 34px;
   color: var(--c-led-red-text);
-  text-shadow: 0 0 8px var(--c-led-red-glow);
+  text-shadow: 
+    0 0 10px var(--c-led-red-glow),
+    0 0 20px rgba(255, 34, 34, 0.7),
+    2px 2px 4px rgba(0, 0, 0, 0.95);
   letter-spacing: 2px;
 }
 
 .led-ampm {
   font-family: var(--font-led);
-  font-size: 11px;
+  font-size: 14px;
   color: var(--c-led-red-text);
-  opacity: 0.85;
+  text-shadow: 
+    0 0 8px var(--c-led-red-glow),
+    2px 2px 4px rgba(0, 0, 0, 0.95);
+  opacity: 0.9;
 }
 
 .clock-indicators {
   display: flex;
   gap: 10px;
-  margin-top: 6px;
-  font-size: 8px;
+  margin-top: 4px;
+  font-size: 9px;
   font-family: var(--font-led);
-  color: #554e47;
+  color: #886666;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.95);
 }
 
 .clock-indicators .indicator.active {
-  color: #ff3333;
-  text-shadow: 0 0 4px rgba(255, 51, 51, 0.8);
+  color: #ff4444;
+  text-shadow: 0 0 6px rgba(255, 68, 68, 0.9), 1px 1px 3px #000;
 }
 
 /* ==========================================================================
-   TOP-RIGHT: LIVE LISTENER CHALK SLATE COUNTER
+   TOP-RIGHT: LIVE LISTENER COUNTER (TRANSPARENT BACKGROUND OVERLAY)
    ========================================================================== */
 .chalk-slate-panel {
   position: absolute;
-  top: 24px;
-  right: 24px;
+  top: 20px;
+  right: 20px;
   z-index: 10;
-  transform: rotate(-1.5deg);
-  filter: drop-shadow(-5px 8px 12px rgba(0, 0, 0, 0.75));
+  transform: rotate(-1deg);
   cursor: pointer;
 }
 
 .slate-wood-frame {
-  background: #4a2e1b;
-  border: 7px solid #362011;
-  border-radius: 4px;
-  padding: 3px;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
 }
 
 .slate-surface {
-  background: #252b2a;
-  border: 1px solid #1a1e1d;
-  padding: 10px 16px;
-  text-align: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: right;
   position: relative;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
-  background-size: 8px 8px;
+  background-image: none;
 }
 
 .chalk-header-text {
   font-family: var(--font-sign);
-  font-size: 16px;
-  color: #edd9b4;
+  font-size: 18px;
+  color: #ffedd8;
   letter-spacing: 1px;
   margin-bottom: 2px;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.8);
+  text-shadow: 
+    0 0 6px rgba(255, 237, 216, 0.5),
+    2px 2px 4px rgba(0, 0, 0, 0.95);
 }
 
 .chalk-counter-body {
   display: flex;
   align-items: baseline;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 6px;
 }
 
 .chalk-number {
   font-family: var(--font-chalk);
-  font-size: 32px;
+  font-size: 34px;
   font-weight: 700;
   color: #ffffff;
-  text-shadow: 0 0 3px rgba(255,255,255,0.7), 2px 2px 0 rgba(0,0,0,0.9);
+  text-shadow: 
+    0 0 6px rgba(255, 255, 255, 0.8),
+    2px 2px 5px rgba(0, 0, 0, 0.95);
 }
 
 .chalk-label {
   font-family: var(--font-chalk);
-  font-size: 15px;
-  color: #dedede;
+  font-size: 16px;
+  color: #f0f0f0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.95);
 }
 
 .chalk-subtext {
   font-family: var(--font-chalk);
-  font-size: 13px;
-  color: #b5c7b3;
+  font-size: 14px;
+  color: #d1e2cf;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.95);
   margin-top: -2px;
 }
 
@@ -331,10 +339,10 @@ html, body {
    ========================================================================== */
 .retro-player-container {
   position: absolute;
-  bottom: 28px;
+  bottom: 20px;
   z-index: 15;
-  width: 92%;
-  max-width: 640px;
+  width: 90%;
+  max-width: 520px;
   filter: drop-shadow(-6px 12px 18px rgba(0, 0, 0, 0.85));
 }
 
