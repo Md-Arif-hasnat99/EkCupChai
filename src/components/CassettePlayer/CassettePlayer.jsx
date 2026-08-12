@@ -211,7 +211,7 @@ export default function CassettePlayer({ onTapeStateChange }) {
               totalTracks={currentTape.tracks.length}
               title={currentTrack.title}
               currentTime={currentTime}
-              freq={currentTrack.freq}
+              totalDuration={currentTrack.duration}
             />
 
             <div className="controls-dials-row">
