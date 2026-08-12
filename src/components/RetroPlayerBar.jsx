@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { audioEngine } from '../utils/audioSynth';
 import { getSpotifyAccessToken, fetchSpotifyTrackInfo } from '../utils/spotifyApi';
 
-// Configure your Spotify API credentials here to fetch album artwork automatically
-const SPOTIFY_CLIENT_ID = ""; // Insert your Client ID
-const SPOTIFY_CLIENT_SECRET = ""; // Insert your Client Secret
+// Configure your Spotify API credentials via the .env file
+const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID || "";
+const SPOTIFY_CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET || "";
 
 // Track & Album configuration supporting local audio files & Spotify cover images
 const ALBUMS = [
