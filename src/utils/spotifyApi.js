@@ -62,3 +62,25 @@ export async function fetchSpotifyTrackInfo(query, accessToken) {
     return null;
   }
 }
+
+/**
+ * Fetch high-resolution track artwork dynamically from Apple iTunes Search API (CORS-free, no auth required)
+ * @param {string} query - Song title and artist
+ * @returns {Promise<string | null>} URL of high-resolution album cover artwork
+ */
+export async function fetchiTunesTrackCover(query) {
+  try {
+    const response = await fetch(
+      `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&media=music&limit=1`
+    );
+    const data = await response.json();
+    const result = data.results?.[0];
+    if (!result || !result.artworkUrl100) return null;
+
+    // Convert default 100x100 artwork URL to high-resolution 600x600 URL
+    return result.artworkUrl100.replace('100x100bb.jpg', '600x600bb.jpg');
+  } catch (error) {
+    console.error('Error searching iTunes artwork:', error);
+    return null;
+  }
+}

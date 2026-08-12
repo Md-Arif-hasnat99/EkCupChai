@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { audioEngine } from '../utils/audioSynth';
-import { getSpotifyAccessToken, fetchSpotifyTrackInfo } from '../utils/spotifyApi';
+import { getSpotifyAccessToken, fetchSpotifyTrackInfo, fetchiTunesTrackCover } from '../utils/spotifyApi';
 
 // Configure your Spotify API credentials via the .env file
 const SPOTIFY_CLIENT_ID = import.meta.env.VITE_SPOTIFY_CLIENT_ID || "";
@@ -71,31 +71,40 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
   const currentTrack = currentAlbum.tracks[currentTrackIndex];
 
   useEffect(() => {
-    async function loadSpotifyCover() {
-      if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
-        setDynamicCoverUrl(null);
-        return;
-      }
+    async function loadArtwork() {
+      const cleanArtist = currentTrack.artist.split('•')[0].split('(')[0].trim();
+      const query = `${currentTrack.title} ${cleanArtist}`;
+
+      // 1. Try loading via iTunes API (instant, CORS-free, no authorization tokens required)
       try {
-        const token = await getSpotifyAccessToken(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET);
-        if (token) {
-          // Clean the artist name (remove bullet points and year details for friendly search query)
-          const cleanArtist = currentTrack.artist.split('•')[0].split('(')[0].trim();
-          const query = `${currentTrack.title} ${cleanArtist}`;
-          
-          const info = await fetchSpotifyTrackInfo(query, token);
-          if (info && info.albumCover) {
-            setDynamicCoverUrl(info.albumCover);
-          } else {
-            setDynamicCoverUrl(null);
-          }
+        const cover = await fetchiTunesTrackCover(query);
+        if (cover) {
+          setDynamicCoverUrl(cover);
+          return;
         }
-      } catch (err) {
-        console.error('Error fetching Spotify cover:', err);
-        setDynamicCoverUrl(null);
+      } catch (e) {
+        console.warn('iTunes artwork lookup failed:', e);
       }
+
+      // 2. Fallback to Spotify Client Credentials Flow if credentials are provided in .env
+      if (SPOTIFY_CLIENT_ID && SPOTIFY_CLIENT_SECRET) {
+        try {
+          const token = await getSpotifyAccessToken(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET);
+          if (token) {
+            const info = await fetchSpotifyTrackInfo(query, token);
+            if (info && info.albumCover) {
+              setDynamicCoverUrl(info.albumCover);
+              return;
+            }
+          }
+        } catch (err) {
+          console.error('Error fetching Spotify cover:', err);
+        }
+      }
+
+      setDynamicCoverUrl(null);
     }
-    loadSpotifyCover();
+    loadArtwork();
   }, [currentTrack]);
 
   useEffect(() => {
