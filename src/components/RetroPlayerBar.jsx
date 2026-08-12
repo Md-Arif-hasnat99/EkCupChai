@@ -39,10 +39,6 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
   const [isPaused, setIsPaused] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
 
-  const [kettleActive, setKettleActive] = useState(true);
-  const [nightActive, setNightActive] = useState(true);
-  const [staticActive, setStaticActive] = useState(false);
-
   const currentAlbum = ALBUMS[currentAlbumIndex];
   const currentTrack = currentAlbum.tracks[currentTrackIndex];
 
@@ -210,43 +206,6 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
           <span className="retro-time-code">{formatTime(currentTrack.duration)}</span>
         </div>
 
-      </div>
-
-      {/* Right Side: Retro Toggle Switches (No Emojis) */}
-      <div className="retro-side-switches">
-        <button 
-          className={`retro-switch-btn ${kettleActive ? 'active' : ''}`}
-          onClick={() => {
-            audioEngine.playButtonClick();
-            setKettleActive(!kettleActive);
-            audioEngine.toggleKettle(!kettleActive);
-          }}
-          title="Toggle Steam Sound"
-        >
-          STEAM
-        </button>
-        <button 
-          className={`retro-switch-btn ${nightActive ? 'active' : ''}`}
-          onClick={() => {
-            audioEngine.playButtonClick();
-            setNightActive(!nightActive);
-            audioEngine.toggleNight(!nightActive);
-          }}
-          title="Toggle Night Sound"
-        >
-          NIGHT
-        </button>
-        <button 
-          className={`retro-switch-btn ${staticActive ? 'active' : ''}`}
-          onClick={() => {
-            audioEngine.playButtonClick();
-            setStaticActive(!staticActive);
-            audioEngine.toggleStatic(!staticActive);
-          }}
-          title="Toggle Static Sound"
-        >
-          STATIC
-        </button>
       </div>
 
     </div>
