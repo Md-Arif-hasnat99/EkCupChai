@@ -326,200 +326,194 @@ html, body {
 }
 
 /* ==========================================================================
-   SPOTIFY-STYLE RECTANGULAR PLAYER BAR
+   AUTHENTIC STANDARD RETRO PLAYER BAR (NO EMOJIS)
    ========================================================================== */
-.spotify-player-bar {
+.retro-player-bar-container {
   position: absolute;
-  bottom: 24px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 92%;
-  max-width: 720px;
-  height: 86px;
-  background: rgba(22, 14, 10, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(224, 122, 95, 0.35);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  max-width: 740px;
+  background: #1c1815;
+  border: 3px solid #3d322b;
+  border-radius: 4px;
+  box-shadow: inset 1px 1px 0 rgba(255,255,255,0.1), 0 10px 25px rgba(0,0,0,0.9);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 16px;
-  gap: 14px;
+  padding: 10px 14px;
+  gap: 12px;
   z-index: 20;
   box-sizing: border-box;
 }
 
-.spotify-album-cover {
-  width: 62px;
-  height: 62px;
-  border-radius: 8px;
+.retro-album-art {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #5a483c;
+  border-radius: 3px;
+  cursor: pointer;
   flex-shrink: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.2);
+  padding: 4px;
+  box-shadow: inset 0 0 6px rgba(0,0,0,0.8);
   transition: transform 0.15s ease;
 }
 
-.spotify-album-cover:hover {
+.retro-album-art:hover {
   transform: scale(1.04);
 }
 
-.album-icon {
-  font-size: 26px;
+.art-label-hindi {
+  font-family: var(--font-sign);
+  font-size: 11px;
+  color: #edd8ab;
+  text-align: center;
+  text-shadow: 1px 1px 0 #000;
 }
 
-.album-tape-badge {
-  position: absolute;
-  bottom: 2px;
-  right: 4px;
+.art-tag {
+  font-family: sans-serif;
   font-size: 8px;
   font-weight: bold;
-  color: #fff;
-  background: rgba(0,0,0,0.65);
-  padding: 1px 4px;
-  border-radius: 2px;
+  color: #ffb01f;
+  letter-spacing: 1px;
+  margin-top: 2px;
 }
 
-.spotify-main-controls {
+.retro-main-section {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
-.spotify-track-info {
+.retro-track-header {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 8px;
+  border-bottom: 1px dashed rgba(255, 176, 31, 0.25);
+  padding-bottom: 3px;
 }
 
-.spotify-track-title {
+.retro-title-text {
   font-family: var(--font-lcd);
-  font-size: 16px;
+  font-size: 17px;
   font-weight: bold;
-  color: #ffedd8;
+  color: #ffb01f;
+  text-shadow: 0 0 6px rgba(255, 176, 31, 0.4);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  letter-spacing: 0.5px;
 }
 
-.spotify-track-artist {
+.retro-artist-text {
   font-family: sans-serif;
   font-size: 10px;
-  color: #baa590;
-  font-weight: 500;
+  color: #a39282;
   white-space: nowrap;
 }
 
-.spotify-buttons-row {
+.retro-controls-row {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 8px;
   margin: 2px 0;
 }
 
-.spotify-btn {
-  background: transparent;
-  border: none;
-  color: #edd9b4;
-  font-size: 16px;
+.retro-mech-btn {
+  background: linear-gradient(to bottom, #3b322d, #241e1b);
+  border: 2px solid #14100e;
+  border-radius: 2px;
+  color: #edd8ab;
+  padding: 5px 12px;
   cursor: pointer;
-  transition: transform 0.1s ease, color 0.1s ease;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 5px;
+  box-shadow: inset 1px 1px 0 rgba(255,255,255,0.15), 0 2px 0 #0f0c0b;
+  transition: transform 0.05s ease;
 }
 
-.spotify-btn:hover {
+.retro-mech-btn:active, .retro-mech-btn.active-state {
+  transform: translateY(2px);
+  background: linear-gradient(to bottom, #1f1a17, #2c2420);
   color: #ffb01f;
-  transform: scale(1.15);
+  box-shadow: inset 0 0 4px #000;
 }
 
-.main-play-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: #ffb01f;
-  color: #141208;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  box-shadow: 0 2px 8px rgba(255, 176, 31, 0.4);
+.mech-icon {
+  font-size: 12px;
 }
 
-.main-play-btn:hover {
-  background: #ffc453;
-  color: #000;
+.mech-text {
+  font-family: sans-serif;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
 }
 
-.spotify-progress-row {
+.retro-timing-row {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.spotify-time {
+.retro-time-code {
   font-family: var(--font-lcd);
-  font-size: 12px;
-  color: #edd9b4;
+  font-size: 13px;
+  color: #edd8ab;
 }
 
-.spotify-progress-bar-bg {
+.retro-progress-bg {
   flex: 1;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 3px;
+  height: 6px;
+  background: #120e0c;
+  border: 1px solid #332720;
+  border-radius: 2px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
 }
 
-.spotify-progress-bar-fill {
+.retro-progress-fill {
   height: 100%;
   background: #ffb01f;
-  border-radius: 3px;
   box-shadow: 0 0 6px rgba(255, 176, 31, 0.6);
   transition: width 0.3s linear;
 }
 
-.spotify-side-controls {
+.retro-side-switches {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  gap: 4px;
   flex-shrink: 0;
 }
 
-.spotify-ambient-rack {
-  display: flex;
-  gap: 4px;
-}
-
-.spotify-chip {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #baa590;
-  padding: 5px 8px;
-  border-radius: 6px;
+.retro-switch-btn {
+  background: #2b2420;
+  border: 2px solid #171311;
+  color: #877464;
+  font-family: sans-serif;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 6px 8px;
+  border-radius: 2px;
   cursor: pointer;
-  font-size: 14px;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  box-shadow: inset 1px 1px 0 rgba(255,255,255,0.1);
 }
 
-.spotify-chip.active {
-  background: rgba(255, 176, 31, 0.25);
-  border-color: #ffb01f;
+.retro-switch-btn.active {
+  background: #7a351d;
   color: #fff;
+  border-color: #4a1d0f;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
 }
 
 /* Modal Popup */
@@ -609,17 +603,16 @@ html, body {
 }
 
 @media (max-width: 600px) {
-  .spotify-player-bar {
+  .retro-player-bar-container {
     width: 96%;
     padding: 8px 10px;
-    height: 80px;
     bottom: 12px;
   }
-  .spotify-album-cover {
+  .retro-album-art {
     width: 48px;
     height: 48px;
   }
-  .spotify-side-controls {
+  .retro-side-switches {
     display: none;
   }
 }

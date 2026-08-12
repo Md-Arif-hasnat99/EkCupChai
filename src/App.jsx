@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DigitalClock from './components/DigitalClock';
 import ChalkSlateCounter from './components/ChalkSlateCounter';
-import SpotifyPlayer from './components/SpotifyPlayer';
+import RetroPlayerBar from './components/RetroPlayerBar';
 import NewspaperModal from './components/NewspaperModal';
 import { audioEngine } from './utils/audioSynth';
 
@@ -95,8 +95,8 @@ export default function App() {
       {/* TOP-RIGHT: LIVE LISTENER CHALK SLATE COUNTER */}
       <ChalkSlateCounter />
 
-      {/* SPOTIFY-STYLE RECTANGULAR PLAYER BAR */}
-      <SpotifyPlayer onTapeStateChange={setIsTapePlaying} />
+      {/* AUTHENTIC STANDARD RETRO PLAYER BAR */}
+      <RetroPlayerBar onTapeStateChange={setIsTapePlaying} />
 
       {/* RETRO NEWSPAPER POPUP MODAL */}
       <NewspaperModal 
