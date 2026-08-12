@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DigitalClock from './components/DigitalClock';
 import ChalkSlateCounter from './components/ChalkSlateCounter';
-import CassettePlayer from './components/CassettePlayer/CassettePlayer';
+import SpotifyPlayer from './components/SpotifyPlayer';
 import NewspaperModal from './components/NewspaperModal';
 import { audioEngine } from './utils/audioSynth';
 
@@ -95,8 +95,8 @@ export default function App() {
       {/* TOP-RIGHT: LIVE LISTENER CHALK SLATE COUNTER */}
       <ChalkSlateCounter />
 
-      {/* MAIN CORE UI: VINTAGE 90s CASSETTE MUSIC PLAYER */}
-      <CassettePlayer onTapeStateChange={setIsTapePlaying} />
+      {/* SPOTIFY-STYLE RECTANGULAR PLAYER BAR */}
+      <SpotifyPlayer onTapeStateChange={setIsTapePlaying} />
 
       {/* RETRO NEWSPAPER POPUP MODAL */}
       <NewspaperModal 
