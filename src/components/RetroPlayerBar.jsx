@@ -61,6 +61,20 @@ const ALBUMS = [
         duration: 381,
         audioUrl: "/audio/Pyar Kiya To Darna Kya Mughal E Azam 320 Kbps.mp3", 
         coverUrl: null 
+      },
+      { 
+        title: "ABHI NA JAO CHHOD KAR", 
+        artist: "Dev Anand & Sadhana • Hum Dono (1961)", 
+        duration: 258,
+        audioUrl: "/audio/Abhi Na Jao Chhod Kar Hum Dono 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "AE MERE HUMSAFAR", 
+        artist: "Aamir Khan & Juhi Chawla • Qayamat Se Qayamat Tak (1988)", 
+        duration: 356,
+        audioUrl: "/audio/Ae Mere Humsafar Qayamat Se Qayamat Tak 320 Kbps.mp3", 
+        coverUrl: null 
       }
     ]
   },
@@ -69,6 +83,20 @@ const ALBUMS = [
     tag: "TAPE B",
     coverStyle: "linear-gradient(135deg, #1e3f3f, #d99a38)",
     tracks: [
+      { 
+        title: "ABHI NA JAO CHHOD KAR", 
+        artist: "Dev Anand & Sadhana • Hum Dono (1961)", 
+        duration: 258,
+        audioUrl: "/audio/Abhi Na Jao Chhod Kar Hum Dono 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "AE MERE HUMSAFAR", 
+        artist: "Aamir Khan & Juhi Chawla • Qayamat Se Qayamat Tak (1988)", 
+        duration: 356,
+        audioUrl: "/audio/Ae Mere Humsafar Qayamat Se Qayamat Tak 320 Kbps.mp3", 
+        coverUrl: null 
+      },
       { 
         title: "AAJA RE PARDESI", 
         artist: "Lata Mangeshkar • Madhumati (1958)", 
