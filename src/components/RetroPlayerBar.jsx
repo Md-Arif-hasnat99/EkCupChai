@@ -33,6 +33,34 @@ const ALBUMS = [
         duration: 237,
         audioUrl: "/audio/Ek Ladki Bheegi Bhagi Si Chalti Ka Naam Gaadi 320 Kbps.mp3", 
         coverUrl: null 
+      },
+      { 
+        title: "AAJA RE PARDESI", 
+        artist: "Lata Mangeshkar • Madhumati (1958)", 
+        duration: 270,
+        audioUrl: "/audio/Aaja Re Pardesi Madhumati (1958) 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "CHALO EK BAR PHIR SE", 
+        artist: "Mahendra Kapoor • Gumrah (1963)", 
+        duration: 279,
+        audioUrl: "/audio/Chalo Ek Bar Phir Se Gumrah 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "PAL PAL DIL KE PAAS", 
+        artist: "Kishore Kumar • Blackmail (1973)", 
+        duration: 329,
+        audioUrl: "/audio/Pal Pal Dil Ke Paas Blackmail 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "PYAR KIYA TO DARNA KYA", 
+        artist: "Lata Mangeshkar • Mughal-E-Azam (1960)", 
+        duration: 381,
+        audioUrl: "/audio/Pyar Kiya To Darna Kya Mughal E Azam 320 Kbps.mp3", 
+        coverUrl: null 
       }
     ]
   },
@@ -41,6 +69,34 @@ const ALBUMS = [
     tag: "TAPE B",
     coverStyle: "linear-gradient(135deg, #1e3f3f, #d99a38)",
     tracks: [
+      { 
+        title: "AAJA RE PARDESI", 
+        artist: "Lata Mangeshkar • Madhumati (1958)", 
+        duration: 270,
+        audioUrl: "/audio/Aaja Re Pardesi Madhumati (1958) 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "CHALO EK BAR PHIR SE", 
+        artist: "Mahendra Kapoor • Gumrah (1963)", 
+        duration: 279,
+        audioUrl: "/audio/Chalo Ek Bar Phir Se Gumrah 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "PAL PAL DIL KE PAAS", 
+        artist: "Kishore Kumar • Blackmail (1973)", 
+        duration: 329,
+        audioUrl: "/audio/Pal Pal Dil Ke Paas Blackmail 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "PYAR KIYA TO DARNA KYA", 
+        artist: "Lata Mangeshkar • Mughal-E-Azam (1960)", 
+        duration: 381,
+        audioUrl: "/audio/Pyar Kiya To Darna Kya Mughal E Azam 320 Kbps.mp3", 
+        coverUrl: null 
+      },
       { 
         title: "AJEEB DASTAAN HAI YEH", 
         artist: "Lata Mangeshkar • Dil Apna Aur Preet Parai (1960)", 
