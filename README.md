@@ -82,4 +82,9 @@ The output files will be located in the `dist/` directory.
 
 ---
 
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
 *Made with love for chai and 90s nostalgia.* ☕✨
