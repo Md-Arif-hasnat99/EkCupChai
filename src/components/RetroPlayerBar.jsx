@@ -9,50 +9,57 @@ const SPOTIFY_CLIENT_SECRET = import.meta.env.VITE_SPOTIFY_CLIENT_SECRET || "";
 // Track & Album configuration supporting local audio files & Spotify cover images
 const ALBUMS = [
   {
-    name: "DDLJ & 90s CLASSICS",
+    name: "RETRO CHAI MIX",
     tag: "TAPE A",
     coverStyle: "linear-gradient(135deg, #5c1d24, #9a3b26)",
     tracks: [
       { 
-        title: "TUJHE DEKHA TOH YEH JANA SANAM", 
-        artist: "Kumar Sanu & Lata Mangeshkar • DDLJ (1995)", 
-        duration: 305,
-        audioUrl: "/audio/Tujhe Dekha Toh Song Dilwale Dulhania Le Jayenge Shah Rukh Khan, Kajol Lata, Kumar Sanu DDLJ.mp3",
-        coverUrl: null
-      },
-      { 
-        title: "SHAM KI CHAI & BPL STEREO", 
-        artist: "Highway Nostalgia", 
-        duration: 215,
-        audioUrl: "/audio/track2.mp3", 
+        title: "AJEEB DASTAAN HAI YEH", 
+        artist: "Lata Mangeshkar • Dil Apna Aur Preet Parai (1960)", 
+        duration: 316,
+        audioUrl: "/audio/Ajib Dastan Hai Yeh Dil Apna Aur Preet Parai 320 Kbps.mp3", 
         coverUrl: null 
       },
       { 
-        title: "GAON KI GALIYAN", 
-        artist: "Acoustic Dusk Harmony", 
-        duration: 198,
-        audioUrl: "/audio/track3.mp3", 
+        title: "MERE SAMNE WALI KHIDKI MEIN", 
+        artist: "Kishore Kumar • Padosan (1968)", 
+        duration: 172,
+        audioUrl: "/audio/Mere Samnewali Khidki Mein Happy Padosan 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "EK LADKI BHEEGI BHAGI SI", 
+        artist: "Kishore Kumar • Chalti Ka Naam Gaadi (1958)", 
+        duration: 237,
+        audioUrl: "/audio/Ek Ladki Bheegi Bhagi Si Chalti Ka Naam Gaadi 320 Kbps.mp3", 
         coverUrl: null 
       }
     ]
   },
   {
-    name: "90s HIGHWAY HITS",
+    name: "GOLDEN RETRO HITS",
     tag: "TAPE B",
     coverStyle: "linear-gradient(135deg, #1e3f3f, #d99a38)",
     tracks: [
       { 
-        title: "MONSOON HIGHWAY '98", 
-        artist: "Cassette Lo-Fi Dreams", 
-        duration: 202,
-        audioUrl: "/audio/track4.mp3", 
+        title: "AJEEB DASTAAN HAI YEH", 
+        artist: "Lata Mangeshkar • Dil Apna Aur Preet Parai (1960)", 
+        duration: 316,
+        audioUrl: "/audio/Ajib Dastan Hai Yeh Dil Apna Aur Preet Parai 320 Kbps.mp3", 
         coverUrl: null 
       },
       { 
-        title: "MIDNIGHT BUS TO MUMBAI", 
-        artist: "Retro Synth Breeze", 
-        duration: 176,
-        audioUrl: "/audio/track5.mp3", 
+        title: "MERE SAMNE WALI KHIDKI MEIN", 
+        artist: "Kishore Kumar • Padosan (1968)", 
+        duration: 172,
+        audioUrl: "/audio/Mere Samnewali Khidki Mein Happy Padosan 320 Kbps.mp3", 
+        coverUrl: null 
+      },
+      { 
+        title: "EK LADKI BHEEGI BHAGI SI", 
+        artist: "Kishore Kumar • Chalti Ka Naam Gaadi (1958)", 
+        duration: 237,
+        audioUrl: "/audio/Ek Ladki Bheegi Bhagi Si Chalti Ka Naam Gaadi 320 Kbps.mp3", 
         coverUrl: null 
       }
     ]
@@ -209,59 +216,93 @@ export default function RetroPlayerBar({ onTapeStateChange }) {
   return (
     <div className="retro-player-bar-container">
       
-      {/* Left Side: Retro Album Artwork or Spotify Cover Image */}
+      {/* Left Side: Retro Cassette Tape or Spotify/iTunes Cover Image */}
       <div 
-        className="retro-album-art" 
-        style={{ 
-          background: (dynamicCoverUrl || currentTrack.coverUrl) 
-            ? `url("${dynamicCoverUrl || currentTrack.coverUrl}") center/cover` 
-            : currentAlbum.coverStyle 
-        }}
+        className="retro-album-art-square"
         onClick={handleSwitchAlbum}
         title="Click to change Tape / Album"
       >
-        {!(dynamicCoverUrl || currentTrack.coverUrl) && (
-          <>
-            <div className="art-label-hindi">एक कप चाय</div>
-            <div className="art-tag">{currentAlbum.tag}</div>
-          </>
+        {(dynamicCoverUrl || currentTrack.coverUrl) ? (
+          <div 
+            className="retro-album-art-image" 
+            style={{ backgroundImage: `url("${dynamicCoverUrl || currentTrack.coverUrl}")` }}
+          />
+        ) : (
+          <div className="retro-cassette-tape">
+            <div className="cassette-label">
+              <div className="cassette-label-header">
+                <span className="label-brand">CHAI-STEREO</span>
+                <span className="label-tag">{currentAlbum.tag}</span>
+              </div>
+              <div className="cassette-label-title">
+                {currentTrack.title}
+              </div>
+            </div>
+            <div className="cassette-window">
+              <div className={`cassette-reel left-reel ${isPlaying && !isPaused ? 'spinning' : ''}`}>
+                <div className="reel-spokes"></div>
+              </div>
+              <div className={`cassette-reel right-reel ${isPlaying && !isPaused ? 'spinning' : ''}`}>
+                <div className="reel-spokes"></div>
+              </div>
+            </div>
+          </div>
         )}
       </div>
 
       {/* Center: Track Details, Progress Bar & Retro Buttons */}
       <div className="retro-main-section">
         
-        {/* Track Title & Artist */}
-        <div className="retro-track-header">
-          <div className="retro-title-text">{currentTrack.title}</div>
+        {/* Brand Silkscreen Plate */}
+        <div className="retro-player-brand-row">
+          <span className="retro-brand-logo">BUSH</span>
+          <span className="retro-spec-text">HIGH FIDELITY STEREO • AUTO REVERSE • DOLBY SYSTEM</span>
+        </div>
+
+        {/* Track Title & Artist in Backlit LCD Panel */}
+        <div className="retro-lcd-display-panel">
+          <div className="retro-track-header">
+            <div className="retro-title-text">{currentTrack.title}</div>
+            <div className="retro-vu-meter">
+              <div className={`vu-bar ${isPlaying && !isPaused ? 'playing-vu-bar' : ''}`}></div>
+              <div className={`vu-bar ${isPlaying && !isPaused ? 'playing-vu-bar' : ''}`}></div>
+              <div className={`vu-bar ${isPlaying && !isPaused ? 'playing-vu-bar' : ''}`}></div>
+              <div className={`vu-bar ${isPlaying && !isPaused ? 'playing-vu-bar' : ''}`}></div>
+            </div>
+          </div>
           <div className="retro-artist-text">{currentTrack.artist} • {currentAlbum.name}</div>
         </div>
 
         {/* Standard Mechanical Retro Control Buttons */}
         <div className="retro-controls-row">
           <button className="retro-mech-btn" onClick={handlePrevTrack} title="Previous Track">
+            <span className="mech-btn-led"></span>
             <span className="mech-icon">⏮</span>
             <span className="mech-text">PREV</span>
           </button>
           
           {isPlaying && !isPaused ? (
             <button className="retro-mech-btn active-state" onClick={handlePause} title="Pause">
+              <span className="mech-btn-led active-play-led"></span>
               <span className="mech-icon">⏸</span>
               <span className="mech-text">PAUSE</span>
             </button>
           ) : (
             <button className="retro-mech-btn" onClick={handlePlay} title="Play">
+              <span className="mech-btn-led"></span>
               <span className="mech-icon">▶</span>
               <span className="mech-text">PLAY</span>
             </button>
           )}
 
           <button className="retro-mech-btn" onClick={handleStop} title="Stop">
+            <span className="mech-btn-led"></span>
             <span className="mech-icon">⏹</span>
             <span className="mech-text">STOP</span>
           </button>
 
           <button className="retro-mech-btn" onClick={handleNextTrack} title="Next Track">
+            <span className="mech-btn-led"></span>
             <span className="mech-icon">⏭</span>
             <span className="mech-text">NEXT</span>
           </button>
