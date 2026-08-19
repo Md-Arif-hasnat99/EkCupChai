@@ -183,75 +183,98 @@ html, body {
 /* ==========================================================================
    TOP-LEFT: 90s RED LED DIGITAL CLOCK (TRANSPARENT BACKGROUND OVERLAY)
    ========================================================================== */
-.retro-clock-panel {
+.retro-analog-clock-container {
   position: absolute;
   top: 20px;
   left: 20px;
   z-index: 10;
+  transform: rotate(-1deg); /* Slight tilt for retro imperfection */
 }
 
-.clock-bezel {
-  background: transparent;
-  border: none;
-  padding: 0;
-  box-shadow: none;
+.clock-dial {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 4px solid #4a3525; /* aged brass bezel */
+  background: radial-gradient(circle, #251f1a 0%, #15110e 100%);
+  position: relative;
+  box-shadow: 
+    inset 0 0 10px rgba(0,0,0,0.9), 
+    0 4px 10px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(255,255,255,0.05);
 }
 
-.clock-header {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-led);
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  color: #ff9999;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.95);
-  margin-bottom: 2px;
+.dial-marker {
+  position: absolute;
+  background: #b09575; /* brass/gold notches */
+  border-radius: 1px;
 }
 
-.led-display {
-  background: transparent;
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  box-shadow: none;
+.marker-12, .marker-6 {
+  width: 2px;
+  height: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.marker-12 { top: 2px; }
+.marker-6 { bottom: 2px; }
+
+.marker-3, .marker-9 {
+  width: 8px;
+  height: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.marker-3 { right: 2px; }
+.marker-9 { left: 2px; }
+
+.clock-hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 4px;
 }
 
-.led-digits {
-  font-family: var(--font-led);
-  font-size: 34px;
-  color: var(--c-led-red-text);
-  text-shadow: 
-    0 0 10px var(--c-led-red-glow),
-    0 0 20px rgba(255, 34, 34, 0.7),
-    2px 2px 4px rgba(0, 0, 0, 0.95);
-  letter-spacing: 2px;
+.hour-hand {
+  width: 4px;
+  height: 25px;
+  margin-left: -2px;
+  background: #edd8ab; /* aged cream hand */
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  z-index: 5;
 }
 
-.led-ampm {
-  font-family: var(--font-led);
-  font-size: 14px;
-  color: var(--c-led-red-text);
-  text-shadow: 
-    0 0 8px var(--c-led-red-glow),
-    2px 2px 4px rgba(0, 0, 0, 0.95);
-  opacity: 0.9;
+.minute-hand {
+  width: 3px;
+  height: 35px;
+  margin-left: -1.5px;
+  background: #edd8ab;
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  z-index: 6;
 }
 
-.clock-indicators {
-  display: flex;
-  gap: 10px;
-  margin-top: 4px;
-  font-size: 9px;
-  font-family: var(--font-led);
-  color: #886666;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.95);
+.second-hand {
+  width: 1.5px;
+  height: 38px;
+  margin-left: -0.75px;
+  background: #ff3333; /* ticking red hand */
+  border-radius: 0;
+  box-shadow: 0 0 2px rgba(255,0,0,0.3);
+  z-index: 7;
 }
 
-.clock-indicators .indicator.active {
-  color: #ff4444;
-  text-shadow: 0 0 6px rgba(255, 68, 68, 0.9), 1px 1px 3px #000;
+.clock-center-pin {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4a3525;
+  border: 1.5px solid #ff3333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
 /* ==========================================================================

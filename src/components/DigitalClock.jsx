@@ -1,48 +1,48 @@
 import React, { useState, useEffect } from 'react';
 
-export default function DigitalClock({ isTapePlaying }) {
-  const [timeStr, setTimeStr] = useState('12:00:00');
-  const [ampm, setAmPm] = useState('PM');
+export default function DigitalClock() {
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
-    const update = () => {
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      const ampmVal = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12;
-      const hoursStr = String(hours).padStart(2, '0');
-      const blink = now.getSeconds() % 2 === 0 ? ':' : ' ';
-
-      setTimeStr(`${hoursStr}${blink}${minutes}${blink}${seconds}`);
-      setAmPm(ampmVal);
-    };
-
-    update();
-    const interval = setInterval(update, 1000);
-    return () => clearInterval(interval);
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
   }, []);
 
+  const seconds = time.getSeconds();
+  const minutes = time.getMinutes();
+  const hours = time.getHours();
+
+  const secondDeg = seconds * 6;
+  const minuteDeg = minutes * 6 + seconds * 0.1;
+  const hourDeg = (hours % 12) * 30 + minutes * 0.5;
+
   return (
-    <div id="digital-clock" class="retro-clock-panel">
-      <div className="clock-bezel">
-        <div className="clock-header">
-          <span className="brand-tag">BPL DIGITAL</span>
-          <span className="model-tag">ALARM-1996</span>
-        </div>
-        <div className="led-display">
-          <span className="led-digits">{timeStr}</span>
-          <span className="led-ampm">{ampm}</span>
-        </div>
-        <div className="clock-indicators">
-          <span className="indicator active">● SLEEP</span>
-          <span className="indicator">● ALARM</span>
-          <span className={`indicator ${isTapePlaying ? 'active' : ''}`}>
-            ● TAPE SYNC
-          </span>
-        </div>
+    <div id="retro-analog-clock" className="retro-analog-clock-container">
+      <div className="clock-dial">
+        {/* Dial markers */}
+        <div className="dial-marker marker-12"></div>
+        <div className="dial-marker marker-3"></div>
+        <div className="dial-marker marker-6"></div>
+        <div className="dial-marker marker-9"></div>
+        
+        {/* Hands */}
+        <div 
+          className="clock-hand hour-hand" 
+          style={{ transform: `rotate(${hourDeg}deg)` }}
+        ></div>
+        <div 
+          className="clock-hand minute-hand" 
+          style={{ transform: `rotate(${minuteDeg}deg)` }}
+        ></div>
+        <div 
+          className="clock-hand second-hand" 
+          style={{ transform: `rotate(${secondDeg}deg)` }}
+        ></div>
+        
+        {/* Center pin */}
+        <div className="clock-center-pin"></div>
       </div>
     </div>
   );
